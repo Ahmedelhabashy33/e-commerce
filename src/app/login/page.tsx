@@ -13,12 +13,14 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 import { LoginSchema, LoginSchemaType } from "@/schema/Login.schema";
 import { Loader2 } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const form = useForm<LoginSchemaType>({
     defaultValues: {
       email: "",
