@@ -1,12 +1,14 @@
+import getMyToken from "@/utilities/getMyToken";
 
 
 export default async function AddToWishList(id: string) {
-  const token = localStorage.getItem("userToken");
-  try {
+  const token = await getMyToken();
+  
     if (!token) {
-      throw new Error("User not logged in");
+      throw new Error("Please login First");
     }
-    const res = await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
+  try {
+      const res = await fetch(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
       method: "Post",
       headers: {
         token: token,
@@ -16,7 +18,8 @@ export default async function AddToWishList(id: string) {
     });
     const payLoad = await res.json();
     return payLoad
-}catch(err){
+   }
+catch(err){
   console.log(err);
   return err
   
